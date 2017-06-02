@@ -5,6 +5,7 @@ import javafx.scene.Scene
 import javafx.scene.paint.Color
 import javafx.stage.Stage
 import javafx.stage.StageStyle
+import pl.madshai.runboard.configuration.loadShortcuts
 import pl.madshai.runboard.views.MainBoardView
 import tornadofx.*
 import java.awt.MenuItem
@@ -20,15 +21,13 @@ import javax.imageio.ImageIO
 
 class RunBoardFx : App(MainBoardView::class) {
 
-
-    private var stageControls = MainBoardData();
-
+    private var showMenuItem = MenuItem();
 
     override fun start(primaryStage: Stage) {
-        this.stageControls.stage = primaryStage;
         prepareTrayMenu()
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         super.start(primaryStage)
+        loadShortcuts()
     }
 
     override fun createPrimaryScene(view: UIComponent): Scene {
@@ -50,26 +49,24 @@ class RunBoardFx : App(MainBoardView::class) {
     }
 
     private fun stageShow() {
-        if (this.stageControls.stage.isShowing) {
-            this.stageControls.stage.close()
+        if (FX.primaryStage.isShowing) {
+            FX.primaryStage.close()
         } else {
-            this.stageControls.stage.show()
+            FX.primaryStage.show()
         }
     }
 
     private fun showMenuChange() {
-        if (this.stageControls.stage.isShowing) {
-            this.stageControls.showMenuItem.label = "Show"
+        if (FX.primaryStage.isShowing) {
+            this.showMenuItem.label = "Show"
         } else {
-            this.stageControls.showMenuItem.label = "Hide"
+            this.showMenuItem.label = "Hide"
         }
 
     }
 
     private fun createItems(popupMenu: PopupMenu) {
-        this.stageControls.showMenuItem = popupMenu.item("Hide", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
+        this.showMenuItem = popupMenu.item("Hide", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
         popupMenu.item("Exit", null, { this.setOnAction { Platform.exit() } })
     }
 }
-
-data class MainBoardData(var stage: Stage = Stage(), var showMenuItem: MenuItem = MenuItem())
