@@ -6,6 +6,7 @@ import javafx.scene.paint.Color
 import javafx.stage.Stage
 import javafx.stage.StageStyle
 import pl.madshai.runboard.configuration.loadShortcuts
+import pl.madshai.runboard.views.ConfigView
 import pl.madshai.runboard.views.MainBoardView
 import tornadofx.*
 import java.awt.MenuItem
@@ -22,6 +23,8 @@ import javax.imageio.ImageIO
 class RunBoardFx : App(MainBoardView::class) {
 
     private var showMenuItem = MenuItem();
+
+    private val configView : ConfigView by inject()
 
     override fun start(primaryStage: Stage) {
         prepareTrayMenu()
@@ -67,6 +70,13 @@ class RunBoardFx : App(MainBoardView::class) {
 
     private fun createItems(popupMenu: PopupMenu) {
         this.showMenuItem = popupMenu.item("Hide", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
+        popupMenu.item("Configuration", null, { this.setOnAction(true, {
+            val stage = Stage()
+            stage.title = "Configuration"
+            stage.scene = Scene(configView.root, 450.0, 450.0)
+            stage.show()
+        }) })
         popupMenu.item("Exit", null, { this.setOnAction { Platform.exit() } })
+
     }
 }

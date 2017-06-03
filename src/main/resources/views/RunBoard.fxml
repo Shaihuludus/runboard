@@ -10,9 +10,10 @@
    <content>
       <GridPane alignment="CENTER" hgap="10.0" styleClass="otherPane" vgap="10.0" >
         <columnConstraints>
-
+            <ColumnConstraints  />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints  />
         </rowConstraints>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
