@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Simple App",
+    "command": "cmd /c start d:/start.bat"
+  },
+  {
+    "name": "Simple App2",
+    "command": "D:/Git/git-bash.exe -c \"sails; bash \""
+  }
+]
+

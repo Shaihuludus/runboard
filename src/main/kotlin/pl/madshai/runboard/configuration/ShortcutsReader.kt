@@ -9,7 +9,7 @@ import java.io.File
  */
 
 fun loadShortcuts() : List<Shortcut>{
-    return jacksonObjectMapper().readValue<List<Shortcut>>(File("test.json"))
+    return jacksonObjectMapper().readValue<List<Shortcut>>(File("shortcuts.json"))
 }
 
-data class Shortcut (val name : String, val path: String)
+data class Shortcut (val name : String, val command: String)

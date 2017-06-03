@@ -1,5 +1,7 @@
 package pl.madshai.runboard.views
 
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
 import javafx.scene.control.Button
 import javafx.scene.control.ScrollPane
 import javafx.scene.layout.GridPane
@@ -8,6 +10,9 @@ import pl.madshai.runboard.configuration.loadShortcuts
 import tornadofx.View
 import javafx.scene.layout.Priority
 import javafx.scene.layout.RowConstraints
+import java.lang.Compiler.command
+
+
 
 
 
@@ -30,6 +35,9 @@ class MainBoardView : View() {
                 val button = Button(loadShortcut.name)
                 button.minWidth = 200.0;
                 button.styleClass.add("shortcut-button");
+                button.setOnAction {  print("dd")
+                    Runtime.getRuntime().exec(loadShortcut.command)}
+
                 borderPane.add(button, counterColumn,counterRow)
                 if(++counterColumn == MAX_COLUMN){
                     counterColumn=0
