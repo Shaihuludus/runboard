@@ -73,7 +73,7 @@ class RunBoardFx : App(MainBoardView::class) {
         popupMenu.item("Configuration", null, { this.setOnAction(true, {
             val stage = Stage()
             stage.title = "Configuration"
-            stage.scene = Scene(configView.root, 450.0, 450.0)
+            stage.scene = Scene(configView.root)
             stage.show()
         }) })
         popupMenu.item("Exit", null, { this.setOnAction { Platform.exit() } })

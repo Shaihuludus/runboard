@@ -7,4 +7,8 @@ import tornadofx.*
  */
 class RunBoardController : Controller(){
 
+    fun executeCommand(command : String){
+        Runtime.getRuntime().exec(command)
+    }
+
 }
