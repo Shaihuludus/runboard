@@ -1,11 +1,1 @@
-[
-  {
-    "name": "Simple App",
-    "command": "cmd /c start d:/start.bat"
-  },
-  {
-    "name": "Simple App2",
-    "command": "D:/Git/git-bash.exe -c \"sails; bash \""
-  }
-]
-
+[{"name":"Simple App","command":"cmd /c start d:/start.bat"},{"name":"Simple App2","command":"D:/Git/git-bash.exe -c \"sails; bash \""},{"name":"dsds","command":"dsdsds"},{"name":"dsdsds","command":"dsdsd"},{"name":"dsdsds","command":"dsdsd"},{"name":"dsdsds","command":"dsdsd"}]

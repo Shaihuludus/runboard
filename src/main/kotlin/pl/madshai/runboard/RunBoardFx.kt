@@ -8,7 +8,9 @@ import javafx.stage.StageStyle
 import pl.madshai.runboard.configuration.loadShortcuts
 import pl.madshai.runboard.views.ConfigView
 import pl.madshai.runboard.views.MainBoardView
-import tornadofx.*
+import tornadofx.App
+import tornadofx.FX
+import tornadofx.UIComponent
 import java.awt.MenuItem
 import java.awt.PopupMenu
 import java.awt.TrayIcon
@@ -24,7 +26,18 @@ class RunBoardFx : App(MainBoardView::class) {
 
     private var showMenuItem = MenuItem();
 
-    private val configView : ConfigView by inject()
+    private val configView: ConfigView by inject()
+
+    private var configStage: Stage = Stage()
+
+    init {
+        with(configView) {
+            configStage = Stage()
+            configStage.title = "Configuration"
+            configStage.scene = Scene(configView.root)
+        }
+
+    }
 
     override fun start(primaryStage: Stage) {
         prepareTrayMenu()
@@ -70,12 +83,11 @@ class RunBoardFx : App(MainBoardView::class) {
 
     private fun createItems(popupMenu: PopupMenu) {
         this.showMenuItem = popupMenu.item("Hide", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
-        popupMenu.item("Configuration", null, { this.setOnAction(true, {
-            val stage = Stage()
-            stage.title = "Configuration"
-            stage.scene = Scene(configView.root)
-            stage.show()
-        }) })
+        popupMenu.item("Configuration", null, {
+            this.setOnAction(true, {
+                configStage.show()
+            })
+        })
         popupMenu.item("Exit", null, { this.setOnAction { Platform.exit() } })
 
     }
