@@ -66,6 +66,10 @@ class RunBoardFx : App(MainBoardView::class) {
         return toReturn
     }
 
+    override fun shouldShowPrimaryStage(): Boolean {
+        return false
+    }
+
     private fun prepareTrayMenu() {
         trayicon(ImageIO.read(ClassLoader.getSystemResource("icon.png")), "RunBoard", false, false, { configureTray(this) })
     }
@@ -96,7 +100,7 @@ class RunBoardFx : App(MainBoardView::class) {
     }
 
     private fun createItems(popupMenu: PopupMenu) {
-        this.showMenuItem = popupMenu.item("Hide", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
+        this.showMenuItem = popupMenu.item("Show", null, { this.setOnAction(true, { showMenuChange(); stageShow() }) })
         popupMenu.item("Configuration", null, {
             this.setOnAction(true, {
                 configStage.show()
