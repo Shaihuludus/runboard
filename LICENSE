@@ -17,15 +17,3 @@
  * limitations under the License.
  * #L%
  */
-package pl.madshai.runboard
-
-import javafx.application.Application
-
-/**
- * Starts the application
- */
-
-fun main(args: Array<String>) {
-    Application.launch(RunBoardFx::class.java, *args)
-}
-

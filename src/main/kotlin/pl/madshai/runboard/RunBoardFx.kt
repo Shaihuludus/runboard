@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * RunBoard
+ * %%
+ * Copyright (C) 2017 Daniel Madejek
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package pl.madshai.runboard
 
 import javafx.application.Platform
@@ -8,20 +27,16 @@ import javafx.stage.StageStyle
 import pl.madshai.runboard.configuration.loadShortcuts
 import pl.madshai.runboard.views.ConfigView
 import pl.madshai.runboard.views.MainBoardView
-import tornadofx.App
-import tornadofx.FX
-import tornadofx.UIComponent
+import tornadofx.*
 import java.awt.MenuItem
 import java.awt.PopupMenu
 import java.awt.TrayIcon
 import java.awt.event.MouseEvent
 import javax.imageio.ImageIO
 
-
 /**
- * Created by daniel.madejek on 2017-06-01.
+ *Creates application with tray icon
  */
-
 class RunBoardFx : App(MainBoardView::class) {
 
     private var showMenuItem = MenuItem();
@@ -32,9 +47,7 @@ class RunBoardFx : App(MainBoardView::class) {
 
     init {
         with(configView) {
-            configStage = Stage()
-            configStage.title = "Configuration"
-            configStage.scene = Scene(configView.root)
+            configStage = configView.prepareStage()
         }
 
     }
@@ -42,6 +55,7 @@ class RunBoardFx : App(MainBoardView::class) {
     override fun start(primaryStage: Stage) {
         prepareTrayMenu()
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.title = "RunBoard"
         super.start(primaryStage)
         loadShortcuts()
     }
@@ -53,7 +67,7 @@ class RunBoardFx : App(MainBoardView::class) {
     }
 
     private fun prepareTrayMenu() {
-        trayicon(ImageIO.read(ClassLoader.getSystemResource("GameCenter-icon.png")), "RunBoard", false, false, { configureTray(this) })
+        trayicon(ImageIO.read(ClassLoader.getSystemResource("icon.png")), "RunBoard", false, false, { configureTray(this) })
     }
 
     private fun configureTray(tray: TrayIcon) {
